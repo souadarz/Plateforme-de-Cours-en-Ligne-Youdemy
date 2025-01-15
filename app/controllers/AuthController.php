@@ -28,11 +28,11 @@ class AuthController extends BaseController{
             $_SESSION['user_loged_in_role'] = $user['role'];
 
             if ($user['role'] == "admin"){
-                header('Location: ../views/Admin/dashboard.php');
+                header('Location: ../views/admin/dashboard.php');
             } else if($user['role'] == "Etudiant"){
-                header('Location: ../views/Borrower/home.php');
+                header('Location: ../views/etudiant/dashboard.php');
             } else{
-                header('Location: ../views/Borrower/home.php');
+                header('Location: ../views/enseignant/dashboard.php');
             }
             exit;
         }
@@ -42,12 +42,26 @@ class AuthController extends BaseController{
         $this->render('auth/login');
     }
 
-    public function handlogin(){
+    public function handleLogin(){
         if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_btn'])){
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            // $user = $this->userModel->signUp($email,$password);
+            $user = $this->userModel->login($email,$password);
+
+            $_SESSION['user_loged_in_id'] = $user['id'];
+            $_SESSION['user_loged_in_name'] = $user['name'];
+            $_SESSION['user_loged_in_email'] = $user['email'];
+            $_SESSION['user_loged_in_role'] = $user['role'];
+
+            if ($user['role'] == "admin"){
+                header('Location: ../views/admin/dashboard.php');
+            } else if($user['role'] == "Etudiant"){
+                header('Location: ../views/etudiant/dashboard.php');
+            } else{
+                header('Location: ../views/enseignant/dashboard.php');
+            }
+            exit;
         }
     }
 }

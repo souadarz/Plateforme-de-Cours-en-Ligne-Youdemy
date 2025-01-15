@@ -23,8 +23,18 @@ class User extends  DataBase{
         return ['id' => $userId,'name'=> $full_name,'email'=>$email,'role' => $role];
     }
 
-    public function login(){
+    public function login($email,$password){
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM utilisateurs WHERE email = ?");
+            $stmt->execute([$email]);
+            $user =$stmt->fetch(PDO::FETCH_ASSOC);
 
+            if($user && password_verify($password, $user['password'])){
+                return $user;
+            }
+        }catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 }
 
