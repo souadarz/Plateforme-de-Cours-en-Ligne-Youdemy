@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/../models/user.php';
+require_once __DIR__ . '/../models/User.php';
 
 class AuthController extends BaseController{
-    private $userModel;
+    private $UserModel;
 
     public function __construct()
     {
-        $this->userModel = new User();
+        $this->UserModel = new User();
     }
 
     public function showRegister(){
@@ -20,21 +20,18 @@ class AuthController extends BaseController{
             $role = $_POST['role'];
             $password = $_POST['password'];
 
-            $user = $this->userModel->signUp($full_name,$email,$password,$role);
+            $user = $this->UserModel->signUp($full_name,$email,$password,$role);
 
             $_SESSION['user_loged_in_id'] = $user['id'];
             $_SESSION['user_loged_in_name'] = $user['name'];
             $_SESSION['user_loged_in_email'] = $user['email'];
             $_SESSION['user_loged_in_role'] = $user['role'];
 
-            if ($user['role'] == "admin"){
-                header('Location: ../views/admin/dashboard.php');
-            } else if($user['role'] == "Etudiant"){
-                header('Location: ../views/etudiant/dashboard.php');
+            if ($user['role'] == "Enseignant"){
+                header('Location: /EnseignantsSusspendu');
             } else{
-                header('Location: ../views/enseignant/dashboard.php');
+                header('Location: /login');
             }
-            exit;
         }
     }
 
@@ -47,20 +44,30 @@ class AuthController extends BaseController{
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $user = $this->userModel->login($email,$password);
+            $user = $this->UserModel->login($email,$password);
 
             $_SESSION['user_loged_in_id'] = $user['id'];
             $_SESSION['user_loged_in_name'] = $user['name'];
             $_SESSION['user_loged_in_email'] = $user['email'];
             $_SESSION['user_loged_in_role'] = $user['role'];
 
-            if ($user['role'] == "admin"){
-                header('Location: ../views/admin/dashboard.php');
+            if ($user['role'] == "Admin"){
+                header('Location: /admin/dashboard');
             } else if($user['role'] == "Etudiant"){
-                header('Location: ../views/etudiant/dashboard.php');
+                header('Location: /etudiant/dashboard');
             } else{
-                header('Location: ../views/enseignant/dashboard.php');
+                header('Location: /enseignant/dashboard');
             }
+            exit;
+        }
+    }
+
+    public function logout(){
+        if (isset($_SESSION['user_loged_in_id']) && isset($_SESSION['user_loged_in_role'])) {
+            unset($_SESSION['user_loged_in_id']);
+            unset($_SESSION['user_loged_in_role']);
+            session_destroy();
+            header("Location:/login");
             exit;
         }
     }

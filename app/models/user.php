@@ -36,6 +36,19 @@ class User extends  DataBase{
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function getUsers(){
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM utilisateurs WHERE role != 'Admin'");
+            $stmt->execute();
+            $users =$stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $users;
+
+        }catch (PDOException $e) {
+            echo "Error in get Users " . $e->getMessage();
+        }
+    }
+
 }
 
 
