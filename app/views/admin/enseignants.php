@@ -7,7 +7,7 @@
     <div class="bg-white shadow">
         <div class="px-8 py-4 flex items-center justify-between">
             <h2 class="text-xl font-semibold text-gray-800">
-                Gestion des Enseignants
+                Management of Teachers
             </h2>
             <!-- <button
                 onclick="toggleAddClientModal()"
@@ -38,14 +38,13 @@
 
                 <div>
                     <label
-                        class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
+                        class="block text-sm font-medium text-gray-700 mb-1">Status</label>
                     <select
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <option>Tous les statuts</option>
-                        <option>Actif</option>
-                        <option>Inactif</option>
-                        <option>En attente</option>
-                        <option>Bloqué</option>
+                        <option>All statuts</option>
+                        <option>Active</option>
+                        <option>suspended</option>
+                        <option>blocked</option>
                     </select>
                 </div>
 
@@ -71,8 +70,8 @@
                     <thead>
                         <tr
                             class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            <th class="p-3">Enseignant</th>
-                            <th class="p-3">Contact</th>
+                            <th class="p-3">Teachers</th>
+                            <th class="p-3">Email</th>
                             <th class="p-3">status</th>
                             <!-- <th class="p-3">Statut</th> -->
                             <th class="p-3">Actions</th>
@@ -84,30 +83,32 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="p-3">
                                     <div class="full_name text-sm font-medium text-gray-900">
-                                        <?= htmlspecialchars($user["nom_utilisateur"]); ?>
+                                        <?= htmlspecialchars($user["full_name"]); ?>
                                     </div>
                                 </td>
                                 <td class="p-3">
                                     <div class="email text-sm text-gray-900"><?= htmlspecialchars($user['email']) ?></div>
                                 </td>
                                 <td class="p-3">
-                                    <div class="text-sm text-gray-900"><?=htmlspecialchars($user['status']) ?></div>
+                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($user['status']) ?></div>
                                 </td>
                                 <td class="p-3">
-                                    <div class="flex space-x-2">
+                                    <div class="flex space-x-2 items-center">
                                         <form method="POST" action="/admin/deleteUser" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez supprimer cet utilisateur ?');">
-                                            <input type="hidden" name="user_id" value="<?= $user['id_utilisateur'] ?>">
-                                            <button class="text-gray-600 hover:text-blue-900" name="delete_user" >
+                                            <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
+                                            <button class="text-gray-600 hover:text-blue-900" name="delete_user">
                                                 <i data-lucide="trash-2" class="w-5 h-5"></i>
                                             </button>
                                         </form>
                                         <button onclick="toggleAddClientModal(event)" id="edit_btn" data-role="<?= $user['role'] ?>" class="edit_user text-gray-600 hover:text-gray-900"
-                                            data-user-id="<?= $user['id_utilisateur'] ?>" class="edit_user text-gray-600 hover:text-gray-900">
+                                            data-user-id="<?= $user['user_id'] ?>" class="edit_user text-gray-600 hover:text-gray-900">
                                             <i data-lucide="edit" class="w-5 h-5"></i>
                                         </button>
-                                        <button class="text-gray-600 hover:text-red-900">
-                                            <i data-lucide="lock" class="w-5 h-5"></i>
-                                        </button>
+                                        <form method="POST" action="/admin/changeUserStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez bloquer cet utilisateur ?');">
+                                            <input type="hidden" name="user_id" value="<?= $user["user_id"] ?>">
+                                            <button class="text-gray-600 hover:text-red-900" name="change_status">
+                                                <i data-lucide="lock" class="w-5 h-5"></i>
+                                            </button>
                                     </div>
                                 </td>
                             </tr>
@@ -135,8 +136,8 @@
                                 </button>
                             </div> -->
 
-                            <!-- Modal Body -->
-                            <!-- <div class="p-6">
+                <!-- Modal Body -->
+                <!-- <div class="p-6">
                                 <form id="addClientForm" class="space-y-6" action="/admin/addUser" method="POST">
                                     Informations personnelles
                                     <div>
@@ -188,12 +189,12 @@
 
                                 </form>
                             </div> -->
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </div>
 
-                <!-- Pagination -->
-                <!-- <div class="flex items-center justify-between mt-6">
+    <!-- Pagination -->
+    <!-- <div class="flex items-center justify-between mt-6">
                     <div class="text-sm text-gray-700">
                         Affichage de 1 à 10 sur 45 clients
                     </div>
@@ -220,9 +221,9 @@
                         </button>
                     </div>
                 </div> -->
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
 </div>
 
 <?php

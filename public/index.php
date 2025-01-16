@@ -28,6 +28,8 @@ Route::get('/logout', [AuthController::class, 'logout']);
 //admin routes
 Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 Route::get('/admin/enseignants', [AdminController::class, 'enseignantsPage']);
+Route::post('/admin/deleteUser', [AdminController::class, 'deleteUser']);
+Route::post('/admin/changeUserStatus', [AdminController::class, 'changeUserStatus']);
 Route::get('/admin/categories', [AdminController::class, 'showCategorie']);
 
 

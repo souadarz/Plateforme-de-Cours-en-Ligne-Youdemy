@@ -115,11 +115,12 @@
           <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300">
         </div>
         <div>
-            <select name="role" id="role" required
+            <select name="role" id="role" 
             class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300">
                 <option value="">Choose an option</option>
-                <option value="Etudiant">Etudiant</option>
-                <option value="Enseignant">Enseignant</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <!-- <option value="Enseignant">Admin</option> -->
             </select>
         </div>
         <div>

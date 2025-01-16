@@ -8,16 +8,15 @@ class User extends  DataBase{
         parent::__construct();
     }
 
-    public function signUp($full_name, $email, $password,$role){
-
-        $usersNumberQuery = "SELECT count(*) FROM utilisateurs";
+    public function signUp($full_name, $email, $password,$role,$status){
+        $usersNbrQuery = "SELECT count(*) FROM users";
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $result = $this->conn->query($usersNumberQuery)->fetchColumn();
+        $result = $this->conn->query($usersNbrQuery)->fetchColumn();
         $role = ($result == 0) ? "Admin" : $_POST['role'];
         // var_dump($role); die();
         
-        $stmt = $this->conn->prepare("INSERT INTO utilisateurs (nom_utilisateur, email, password, role) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$full_name, $email,$hashedPassword, $role]);
+        $stmt = $this->conn->prepare("INSERT INTO users (full_name, email, password, role, status) VALUES (?, ?, ?,?,?)");
+        $stmt->execute([$full_name, $email,$hashedPassword,$role,$status]);
         
         $userId = $this->conn->lastInsertId();
         return ['id' => $userId,'name'=> $full_name,'email'=>$email,'role' => $role];
@@ -25,7 +24,7 @@ class User extends  DataBase{
 
     public function login($email,$password){
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM utilisateurs WHERE email = ?");
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $user =$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -39,7 +38,7 @@ class User extends  DataBase{
 
     public function getUsers(){
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM utilisateurs WHERE role != 'Admin'");
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE role != 'Admin'");
             $stmt->execute();
             $users =$stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $users;
@@ -49,6 +48,31 @@ class User extends  DataBase{
         }
     }
 
+    public function deleteUser($user_id){
+        try {
+            $stmt = $this->conn->prepare("DELETE FROM users WHERE user_id = ?");
+            $stmt->execute([$user_id]);
+
+        }catch (PDOException $e) {
+            echo "Error in delete User " . $e->getMessage();
+        }
+    }
+
+    public function getUserStatus($user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT status FROM users WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchColumn();
+    }
+    
+    public function changeUserStatus($statut, $user_id){
+        try {
+            $changeStatusQuery = $this->conn->prepare("UPDATE users SET status= ? WHERE user_id = ?");
+            $changeStatusQuery->execute([$statut, $user_id]);
+        } catch (PDOException $e) {
+            echo "Error in change user Status: " . $e->getMessage();
+        }
+    }
 }
 
 
