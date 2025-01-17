@@ -74,8 +74,8 @@ class User extends  DataBase{
     
     public function changeUserStatus($statut, $user_id){
         try {
-            $changeStatusQuery = $this->conn->prepare("UPDATE users SET status= ? WHERE user_id = ?");
-            $changeStatusQuery->execute([$statut, $user_id]);
+            $stmt = $this->conn->prepare("UPDATE users SET status= ? WHERE user_id = ?");
+            $stmt->execute([$statut, $user_id]);
         } catch (PDOException $e) {
             echo "Error in change user Status: " . $e->getMessage();
         }

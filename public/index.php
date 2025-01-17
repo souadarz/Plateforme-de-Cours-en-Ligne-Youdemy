@@ -30,10 +30,15 @@ Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 Route::get('/admin/enseignants', [AdminController::class, 'enseignantsPage']);
 Route::post('/admin/deleteUser', [AdminController::class, 'deleteUser']);
 Route::post('/admin/changeUserStatus', [AdminController::class, 'changeUserStatus']);
+Route::post('/admin/activerStatus', [AdminController::class, 'activerStatus']);
 Route::get('/admin/categories', [AdminController::class, 'showCategorie']);
 Route::post('/admin/addcategory', [AdminController::class, 'addCategory']);
 Route::post('/admin/updateCategory', [AdminController::class, 'updateCategory']);
 Route::post('/admin/deleteCategory', [AdminController::class, 'deleteCategory']);
+Route::get('/admin/tags', [AdminController::class, 'ShowTags']);
+Route::post('/admin/addtag', [AdminController::class, 'addTag']);
+Route::post('/admin/updatetag', [AdminController::class, 'updateTag']);
+Route::post('/admin/deletetag', [AdminController::class, 'deleteTag']);
 
 
 

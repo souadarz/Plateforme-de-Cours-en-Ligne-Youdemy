@@ -98,15 +98,22 @@
                                                 <i data-lucide="trash-2" class="w-5 h-5"></i>
                                             </button>
                                         </form>
-                                        <button onclick="toggleAddClientModal(event)" id="edit_btn" data-role="<?= $user['role'] ?>" class="edit_user text-gray-600 hover:text-gray-900"
+                                        <form method="POST" action="/admin/activerStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez Activer cet utilisateur ?');">
+                                            <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
+                                            <button class="text-gray-600 hover:text-blue-900" name="activer_status">
+                                                <i data-lucide="lock-open" class="w-5 h-5"></i>
+                                            </button>
+                                        </form>
+                                        <!-- <button onclick="toggleAddClientModal(event)" id="activate_btn" data-role="<?= $user['status'] ?>" class="edit_user text-gray-600 hover:text-gray-900"
                                             data-user-id="<?= $user['user_id'] ?>" class="edit_user text-gray-600 hover:text-gray-900">
-                                            <i data-lucide="edit" class="w-5 h-5"></i>
-                                        </button>
+                                            <i data-lucide="lock-open" class="w-5 h-5"></i>
+                                        </button> -->
                                         <form method="POST" action="/admin/changeUserStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez bloquer cet utilisateur ?');">
                                             <input type="hidden" name="user_id" value="<?= $user["user_id"] ?>">
                                             <button class="text-gray-600 hover:text-red-900" name="change_status">
                                                 <i data-lucide="lock" class="w-5 h-5"></i>
                                             </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
