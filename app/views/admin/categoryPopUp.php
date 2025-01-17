@@ -7,7 +7,7 @@
             <button id="close_categorie_modal" class="flex justify-end items-center mb-4 float-right text-xl">&times;</button>
         </div>
         <!-- add and modify categorie Form -->
-        <form method="POST" action="../../controllers/Category/createModifyCategory.php" id="category_form" class="mt-[25%] md:px-10 hidden">
+        <form method="POST" action="/admin/addcategory" id="category_form" class="mt-[25%] md:px-10 hidden">
             <div class="flex w-full">
                 <label for="category_name_input" class="text-gray-900 font-semibold w-1/3">Category Name:</label>
                 <input type="text" class="hidden" name="category_id_input" value="0" id="category_id_input">
@@ -39,7 +39,7 @@
         document.getElementById('category_form').classList.remove("hidden");
         document.getElementById("category_id_input").value=modifyCategoryButton.closest(".category_box").getAttribute("data-category-id");                
         document.getElementById("category_name_input").value=modifyCategoryButton.closest(".category_box")?.querySelector("h3").textContent;
-        
+        document.getElementById('category_form').setAttribute("action", "/admin/updateCategory");
     }
     });
     function showModal(){

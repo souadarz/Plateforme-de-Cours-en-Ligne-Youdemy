@@ -8,6 +8,8 @@ class User extends  DataBase{
         parent::__construct();
     }
 
+//Authentification
+
     public function signUp($full_name, $email, $password,$role,$status){
         $usersNbrQuery = "SELECT count(*) FROM users";
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -60,9 +62,14 @@ class User extends  DataBase{
 
     public function getUserStatus($user_id)
     {
+        try{
         $stmt = $this->conn->prepare("SELECT status FROM users WHERE user_id = ?");
         $stmt->execute([$user_id]);
-        return $stmt->fetchColumn();
+        $status = $stmt->fetchColumn();
+        return $status;
+        } catch (PDOException $e) {
+            echo "Error in get user Status: " . $e->getMessage();
+        }
     }
     
     public function changeUserStatus($statut, $user_id){
@@ -73,6 +80,7 @@ class User extends  DataBase{
             echo "Error in change user Status: " . $e->getMessage();
         }
     }
+
 }
 
 

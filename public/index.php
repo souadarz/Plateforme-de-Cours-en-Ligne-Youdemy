@@ -31,6 +31,9 @@ Route::get('/admin/enseignants', [AdminController::class, 'enseignantsPage']);
 Route::post('/admin/deleteUser', [AdminController::class, 'deleteUser']);
 Route::post('/admin/changeUserStatus', [AdminController::class, 'changeUserStatus']);
 Route::get('/admin/categories', [AdminController::class, 'showCategorie']);
+Route::post('/admin/addcategory', [AdminController::class, 'addCategory']);
+Route::post('/admin/updateCategory', [AdminController::class, 'updateCategory']);
+Route::post('/admin/deleteCategory', [AdminController::class, 'deleteCategory']);
 
 
 

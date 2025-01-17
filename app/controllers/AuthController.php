@@ -46,7 +46,6 @@ class AuthController extends BaseController{
         }
         }
 
-
     public function showLogin(){
         $this->render('auth/login');
     }
