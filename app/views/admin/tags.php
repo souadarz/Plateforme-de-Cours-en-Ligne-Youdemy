@@ -5,8 +5,8 @@
             <section class="p-8 antialiased md:py-16">
                 <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
                     <div class="mb-4 flex items-center justify-between gap-4 md:mb-8">
-                        <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Tags</h2>
-                        <button id="add_tag_button" class="text-gray-100 bg-gray-900 hover:bg-gray-700 p-3 mb-5 mr-5 rounded-sm">Add Tag</button>
+                        <h2 class="text-xl font-semibold px-2 text-gray-900 sm:text-2xl">Tags</h2>
+                        <button id="add_tag_button" class="text-gray-100 bg-gray-900 hover:bg-gray-700 p-3 mb-5 mr-5 rounded-sm px-6">Add Tag</button>
                     </div>
 
                     <!-- tags will apear here -->

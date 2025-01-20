@@ -103,12 +103,18 @@ class AdminController extends BaseController{
         $this->render('admin/tags',["tags"=>$tags]);
     }
 
-    public function addTag(){
-        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_modify_tag'])){
-            $name_tag = $_POST['tag_name_input'];
-            $this->TagModel->addTag($name_tag);
-            header('location:/admin/tags');
+    public function addTag()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_modify_tag'])) {
+            $name_tags = trim($_POST['tag_name_input']);
+            $tags = array_map('trim', explode(',', $name_tags));
+            foreach($tags as $tag){
+                if (!empty($tag)){
+                    $this->TagModel->AddTag($tag);
+                }
+            }
         }
+        header('location:/admin/tags');
     }
 
     public function updateTag(){

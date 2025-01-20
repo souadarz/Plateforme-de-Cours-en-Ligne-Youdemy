@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/database.php';
 
 class User extends  DataBase{
-
+    
     public function __construct()
     {
         parent::__construct();
@@ -80,7 +80,6 @@ class User extends  DataBase{
             echo "Error in change user Status: " . $e->getMessage();
         }
     }
-
 }
 
 

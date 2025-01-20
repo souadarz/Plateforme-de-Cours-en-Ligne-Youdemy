@@ -24,7 +24,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label
-                        class="block text-sm font-medium text-gray-700 mb-1">Rechercher</label>
+                        class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                     <div class="relative">
                         <input
                             type="text"
@@ -71,7 +71,6 @@
                             <th class="p-3">Teachers</th>
                             <th class="p-3">Email</th>
                             <th class="p-3">status</th>
-                            <!-- <th class="p-3">Statut</th> -->
                             <th class="p-3">Actions</th>
                         </tr>
                     </thead>

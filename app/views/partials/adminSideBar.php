@@ -4,8 +4,17 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
 <div class="flex flex-col h-full">
     <div class="p-6">
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-white">Admin
-                Panel</h1>
+        <div>
+			<svg
+				class="h-14 w-14 fill-current text-gray-100"
+				viewBox="0 0 24 24">
+				<path
+					d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3m6.82
+					6L12 12.72 5.18 9 12 5.28 18.82 9M17 16l-5 2.72L7 16v-3.73L12
+					15l5-2.73V16z"></path>
+			</svg>
+		</div>
+            <h1 class="text-2xl font-bold text-white"> Youdemy</h1>
             <button onclick="toggleSidebar()"
                 class="lg:hidden text-white">
                 <i data-lucide="x" class="w-6 h-6"></i>
@@ -15,6 +24,7 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
     </div>
 
     <!-- Navigation -->
+    <?php if($_SESSION['user_loged_in_role'] == 'Admin') :?>
     <nav class="mt-6 flex-grow">
         <a href="/admin/dashboard"
             class="flex items-center w-full px-6 py-3 text-white bg-gray-800">
@@ -55,10 +65,34 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
         <a href="#"
             class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
             <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
-            <span>Paramètres</span>
+            <span>Parametres</span>
         </a>
     </nav>
+ 
+    <?php elseif($_SESSION['user_loged_in_role'] == 'Teacher') :?>
+        <nav class="mt-6 flex-grow">
+            <a href="/teacher/dashboard"
+                class="flex items-center w-full px-6 py-3 text-white bg-gray-800">
+                <i data-lucide="layout-dashboard"
+                class="w-5 h-5 mr-3"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/teacher/courses"
+                class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
+                <i data-lucide="repeat" class="w-5 h-5 mr-3"></i>
+                <span>Courses</span>
+            </a>
+        </nav>
 
+    <?php elseif ($_SESSION['user_loged_in_role'] == 'Student') :?>
+        <nav class="mt-6 flex-grow">
+            <a href="/student/mesCours"
+                class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
+                <i data-lucide="repeat" class="w-5 h-5 mr-3"></i>
+                <span>My Courses</span>
+            </a>
+        </nav>
+    <?php endif;?>
     <!-- Profil Admin avec Déconnexion -->
     <div class="border-t border-gray-800 p-6">
         <div class="relative">
@@ -83,20 +117,14 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
                     class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-t-lg">
                     <i data-lucide="user"
                         class="w-4 h-4 inline-block mr-2"></i>
-                    Mon profil
-                </a>
-                <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">
-                    <i data-lucide="settings"
-                        class="w-4 h-4 inline-block mr-2"></i>
-                    Paramètres
+                    My profil
                 </a>
                 <a
                     href="/logout"
                     class="block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 rounded-b-lg">
                     <i data-lucide="log-out"
                         class="w-4 h-4 inline-block mr-2"></i>
-                    Déconnexion
+                    Logout
                 </a>
             </div>
         </div>
@@ -104,4 +132,4 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
 </div>
 </div>
 
-<script src="/assets/js/categoryPopUp.js"></script>
+<!-- <script src="/assets/js/categoryPopUp.js"></script> -->

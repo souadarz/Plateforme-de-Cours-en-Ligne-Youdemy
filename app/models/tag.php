@@ -19,11 +19,14 @@ class Tag extends  DataBase{
         }
     }
 
-    public function AddTag($tag_name){
+    public function AddTag($tag){
         try {
-            $stmt = $this->conn->prepare("INSERT INTO tags (tag_name) VALUES (?)");
-            $stmt->execute([$tag_name]);
-
+                $stmt = $this->conn->prepare("SELECT tag_id FROM tags WHERE tag_name = ?");
+                $stmt->execute([$tag]);
+                if($stmt->rowCount() === 0){
+                        $stmt = $this->conn->prepare("INSERT INTO tags (tag_name) VALUES (?)");
+                        $stmt->execute([$tag]);
+                }
         } catch (PDOException $e) {
             echo " Error in add tag" . $e->getMessage();
         }

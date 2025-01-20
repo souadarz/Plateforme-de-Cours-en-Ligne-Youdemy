@@ -7,11 +7,14 @@ require_once '../core/Route.php';
 
 require_once '../app/controllers/AuthController.php';
 require_once '../app/controllers/AdminController.php';
+require_once '../app/controllers/EnseignantContoller.php';
+require_once '../app/controllers/EtudiantContoller.php';
 
 
 $router = new Router();
 Route::setRouter($router);
-
+$baseController = new BaseController();
+// $baseController->checkRole();
 
 
 // Define routes
@@ -39,6 +42,18 @@ Route::get('/admin/tags', [AdminController::class, 'ShowTags']);
 Route::post('/admin/addtag', [AdminController::class, 'addTag']);
 Route::post('/admin/updatetag', [AdminController::class, 'updateTag']);
 Route::post('/admin/deletetag', [AdminController::class, 'deleteTag']);
+
+
+//teacher routes
+Route::get('/admin/categories', [AdminController::class, 'showCategorie']);
+Route::get('/teacher/dashboard', [EnseignantContoller::class, 'teacherDashboard']);
+Route::get('/teacher/courses', [EnseignantContoller::class, 'teacherCoursePage']);
+
+
+//student route 
+Route::get('/student/mycourses', [EtudiantContoller::class, 'studentCoursePage']);
+
+
 
 
 
