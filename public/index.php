@@ -14,7 +14,7 @@ require_once '../app/controllers/EtudiantContoller.php';
 $router = new Router();
 Route::setRouter($router);
 $baseController = new BaseController();
-// $baseController->checkRole();
+$baseController->checkRole();
 
 
 // Define routes
@@ -48,6 +48,7 @@ Route::post('/admin/deletetag', [AdminController::class, 'deleteTag']);
 Route::get('/admin/categories', [AdminController::class, 'showCategorie']);
 Route::get('/teacher/dashboard', [EnseignantContoller::class, 'teacherDashboard']);
 Route::get('/teacher/courses', [EnseignantContoller::class, 'teacherCoursePage']);
+Route::post('/teacher/courses', [EnseignantContoller::class, 'AddCourse']);
 
 
 //student route 

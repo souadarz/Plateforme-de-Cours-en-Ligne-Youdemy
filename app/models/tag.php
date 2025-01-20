@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../config/database.php';
+require_once 'db.php';
 
-class Tag extends  DataBase{
-
+class Tag {
+    private $conn ;
     public function __construct()
     {
-        parent::__construct();
+        $this->conn = db::getInstance()->getConnection();
     }
 
     public function getTags(){
