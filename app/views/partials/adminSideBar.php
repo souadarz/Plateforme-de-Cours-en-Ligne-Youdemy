@@ -42,7 +42,7 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
             <i data-lucide="users" class="w-5 h-5 mr-3"></i>
             <span>Students</span>
         </a>
-        <a href="/admin/cours"
+        <a href="/admin/courses"
             class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
             <i data-lucide="repeat" class="w-5 h-5 mr-3"></i>
             <span>Courses</span>
@@ -99,8 +99,8 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
             <button
                 onclick="toggleProfileMenu()"
                 class="flex items-center w-full text-white hover:bg-gray-800 rounded-lg p-2">
-                <img src="/api/placeholder/32/32" alt="Admin"
-                    class="w-8 h-8 rounded-full">
+                <!-- <img src="/api/placeholder/32/32" alt="Admin"
+                    class="w-8 h-8 rounded-full"> -->
                 <div class="ml-3 flex-grow">
                     <p class="text-sm font-medium"><?= $_SESSION['user_loged_in_name']; ?></p>
                     <p class="text-xs text-gray-400"><?= $_SESSION['user_loged_in_email']; ?></p>

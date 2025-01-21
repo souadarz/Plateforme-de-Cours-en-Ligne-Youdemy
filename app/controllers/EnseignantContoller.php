@@ -49,13 +49,33 @@ class EnseignantContoller extends BaseController{
                 $ContentModelVid = new CourseContentVideo($course_id,$file_name);
                 $ContentModelVid->save();
             }
+            header('Location:/teacher/courses');
         }
     }
 
     public function showCourses(){
         $user_id = $_SESSION['user_loged_in_id'];
         $courses = $this->CourseModel->getCourses($user_id);
-        $this->render('/teacher/courses',["courses"=>$courses]);
+        $categories = $this->CategoryModel->getCategories();
+        $tags = $this->TagModel->getTags();
+        $this->render('/teacher/courses',["courses"=>$courses,"categories"=>$categories,"tags"=>$tags]);
+    }
+
+    public function getCourseById($course_id){
+        $course = $this->CourseModel->getCourseById($course_id);
+        $this->render('/teacher/course_updated', ["course"=>$course]);
+    }
+
+    public function updateCourse(){
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_course'])){
+            $title = $_POST['title_cours'];
+            $description = $_POST['descri_cours'];
+            $categorie = $_POST['categorie_cours'];
+            $tags = $_POST['tags_cours'];
+            $type = $_POST['type_cours'];
+            $this->CourseModel->updateCourse($title,$description,$categorie);
+            header('Location:/teacher/courses');
+        }
     }
 
     public function deleteCourse(){

@@ -44,18 +44,11 @@
                                                 <i data-lucide="trash-2" class="w-5 h-5"></i>
                                             </button>
                                         </form>
-                                        <form method="POST" action="/admin/activerStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez Activer cet utilisateur ?');">
-                                            <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
-                                            <button class="text-gray-600 hover:text-blue-900" name="activer_status">
-                                                <i data-lucide="lock-open" class="w-5 h-5"></i>
+                                        <a href="/teacher/course_updated/<?= $course['course_id'] ?>">
+                                            <button data-course-id="<?= $course['course_id'] ?>" class="updateCours text-gray-600 hover:text-blue-900" name="update_course">
+                                                <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
-                                        </form>
-                                        <form method="POST" action="/admin/changecourseStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez bloquer cet utilisateur ?');">
-                                            <input type="hidden" name="course_id" value="<?= $course["course_id"] ?>">
-                                            <button class="text-gray-600 hover:text-red-900" name="change_status">
-                                                <i data-lucide="lock" class="w-5 h-5"></i>
-                                            </button>
-                                        </form>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -104,19 +97,6 @@
                     <input type="file" placeholder="" name="file"
                         class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg" />
                 </div>
-                <!-- contenu selon  le type de contenu -->
-                <!-- <div id="type-text" class="hidden">
-                    <label class="text-gray-700 text-sm mb-1 block">Texte de cours</label>
-                    <textarea placeholder="Entrez le Contenu Text" name="text_cours"
-                        class="resize-none px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg"></textarea>
-                </div>
-
-                <div id="type-video" class="hidden">
-                    <label class="text-gray-700 text-sm mb-1 block">URI video</label>
-                    <input type="url" placeholder="Entrez le URL du Video" name="video_cours"
-                        class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg" />
-                </div> -->
-
                 <div>
                     <!-- select categorie -->
                     <label class="text-gray-800 text-sm mb-1 block">Categorie</label>
@@ -149,7 +129,74 @@
         </div>
     </div>
 
-</main>
+  <!-- //updatecourse -->
+    <!-- <div
+        class="coursUpdateModal hidden fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+        <div class="w-full max-w-lg bg-gray-200 shadow-lg rounded-lg p-8 relative">
+            <div class="flex items-center">
+                <h3 class="text-gray-700 text-xl font-bold flex-1">Update Course</h3>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" action="/" class="space-y-4 mt-8">
+                <div>
+                    <label class="text-gray-700 text-sm mb-1 block">Course title</label>
+                    <input type="text" placeholder="Entrez le titre de cours" name="title_cours"
+                        class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg" />
+                </div>
+
+                <div>
+                    <label class="text-gray-700 text-sm mb-1 block">Course discription</label>
+                    <textarea placeholder='Entrez la description de cours' name="descri_cours"
+                        class="resize-none px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg" rows="3"></textarea>
+                </div>
+
+                <div>
+                    <label class="text-gray-700 text-sm mb-1 block">Course Type</label>
+                    <select placeholder="Entrez le Type de cours" id="select_type" name="type_cours"
+                        class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg">
+                        <option value="video">Video</option>
+                        <option value="document">Document</option>
+                   
+                    </select>
+                </div>
+                <div>
+                    <label class="text-gray-700 text-sm mb-1 block">Link</label>
+                    <input type="file" placeholder="" name="file"
+                        class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg" />
+                </div>
+
+                <div>
+                     select categorie -->
+                    <!-- <label class="text-gray-800 text-sm mb-1 block">Categorie</label>
+                    <select placeholder="Enter le Catégorie du cours" name="categorie_cours"
+                        class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg">
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['category_id'] ?>"><?= $category['category_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-gray-800 text-sm mb-1 block">Tags</label>
+                     Select tags 
+                    <select name="tags_cours[]" id="tags" multiple>
+                    <?php foreach ($tags as $tag): ?>
+                            <option value="<?= $tag['tag_id'] ?>"><?= $tag['tag_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    
+                </div>
+
+                <div class="flex justify-end gap-4 !mt-8">
+                    <button type="button"
+                        class="closee px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-gray-900 hover:bg-gray-700">Cancel</button>
+                    <button name="btn_add_cours"
+                        class="px-8 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide  bg-gray-900 hover:bg-gray-700">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>-->
+</main> 
 
 <?php require_once(__DIR__ . '../../partials/buttom.php'); ?>
 
@@ -168,5 +215,15 @@
     close.addEventListener("click", () => {
         coursAddModal.classList.toggle("hidden");
     });
-    // new MultiSelectTag("tags_update"); // id
+
+     // update cours model ++++++++++++++++++++++++++++++++++++++++++++++++++
+     const updateCours = document.querySelector(".updateCours");
+    const closee = document.querySelector(".closee");
+    const coursUpdateModal = document.querySelector(".coursUpdateModal");
+    updateCours.addEventListener("click", () => {
+        coursUpdateModal.classList.toggle("hidden");
+    });
+    closee.addEventListener("click", () => {
+        coursUpdateModal.classList.toggle("hidden");
+    });
 </script>

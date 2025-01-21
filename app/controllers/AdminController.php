@@ -7,12 +7,14 @@ class AdminController extends BaseController{
     private $UserModel;
     private $CategoryModel;
     private $TagModel;
+    private $CourseModel;
 
     public function __construct()
     {
         $this->UserModel = new User();
         $this->CategoryModel = new Category();
         $this->TagModel = new Tag();
+        $this->CourseModel = new Course();
     }
 
     public function adminDashboard(){
@@ -39,8 +41,7 @@ class AdminController extends BaseController{
     }
     
     public function changeUserStatus(){
-        // var_dump($_POST);
-        // die;
+        
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_status'])){
             $user_id = $_POST['user_id'];
             
@@ -141,6 +142,24 @@ class AdminController extends BaseController{
         return json_encode(["label"=>"test"]);
     }
 
-}
+// gestion des cours
+    public function coursesPage(){
+        $this->render('/admin/courses');
+    }
+    
+    public function showAllCourses(){
+        $courses = $this->CourseModel->getAllCourses();
+        $categories = $this->CategoryModel->getCategories();
+        $tags = $this->TagModel->getTags();
+        $this->render('/admin/courses',["courses"=>$courses,"categories"=>$categories,"tags"=>$tags]);
+    }
 
+    public function deleteCourse(){
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_course'])){
+            $course_id = $_POST['course_id'];
+            $this->CourseModel->deleteCourse($course_id);
+            header('Location:/admin/courses');
+        }
+    }   
+}
 ?>

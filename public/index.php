@@ -43,6 +43,9 @@ Route::post('/admin/addtag', [AdminController::class, 'addTag']);
 Route::post('/admin/updatetag', [AdminController::class, 'updateTag']);
 Route::post('/admin/deletetag', [AdminController::class, 'deleteTag']);
 Route::get('/admin/searchUsers', [AdminController::class, 'searchUsers']);
+Route::get('/admin/courses', [AdminController::class, 'coursesPage']);
+Route::post('/admin/deletecourse', [AdminController::class, 'deleteCourse']);
+Route::get('/admin/courses', [AdminController::class, 'showAllCourses']);
 
 
 //teacher routes
@@ -52,6 +55,8 @@ Route::get('/teacher/courses', [EnseignantContoller::class, 'teacherCoursePage']
 Route::post('/teacher/courses', [EnseignantContoller::class, 'AddCourse']);
 Route::get('/teacher/courses', [EnseignantContoller::class, 'showCourses']);
 Route::post('/teacher/deletecourse', [EnseignantContoller::class, 'deleteCourse']);
+Route::post('/teacher/updatecourse', [EnseignantContoller::class, 'updateCourse']);
+Route::get('/teacher/course_updated/{course_id}', [EnseignantContoller::class, 'getCourseById']);
 
 
 
