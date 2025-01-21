@@ -9,7 +9,6 @@
             <button id="add_course_button" class="addCours text-gray-100 bg-gray-900 hover:bg-gray-700 py-3 px-6 mb-5 mr-5 mt-4 rounded-sm">Add Course</button>
         </div>
     </header>
-
     <div class="bg-white rounded-lg shadow">
             <div class="p-6">
                 <table class="min-w-full">
@@ -24,37 +23,35 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         <!-- Client 1 -->
-                        <?php 
-                        // foreach ($courses as $course): 
-                            ?>
+                        <?php foreach ($courses as $course): ?>
                             <tr class="hover:bg-gray-50">
                                 <td class="p-3">
                                     <div class="full_name text-sm font-medium text-gray-900">
-                                        <?= htmlspecialchars($user["full_name"]); ?>
+                                        <?= htmlspecialchars($course["title"]); ?>
                                     </div>
                                 </td>
                                 <td class="p-3">
-                                    <div class="email text-sm text-gray-900"><?= htmlspecialchars($user['email']) ?></div>
+                                    <div class="email text-sm text-gray-900"><?= htmlspecialchars($course['description']) ?></div>
                                 </td>
                                 <td class="p-3">
-                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($user['status']) ?></div>
+                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($course['category_id']) ?></div>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex space-x-2 items-center">
-                                        <form method="POST" action="/admin/deleteUser" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez supprimer cet utilisateur ?');">
-                                            <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
-                                            <button class="text-gray-600 hover:text-blue-900" name="delete_user">
+                                        <form method="POST" action="/teacher/deletecourse" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez supprimer cet utilisateur ?');">
+                                            <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
+                                            <button class="text-gray-600 hover:text-blue-900" name="delete_course">
                                                 <i data-lucide="trash-2" class="w-5 h-5"></i>
                                             </button>
                                         </form>
                                         <form method="POST" action="/admin/activerStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez Activer cet utilisateur ?');">
-                                            <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
+                                            <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
                                             <button class="text-gray-600 hover:text-blue-900" name="activer_status">
                                                 <i data-lucide="lock-open" class="w-5 h-5"></i>
                                             </button>
                                         </form>
-                                        <form method="POST" action="/admin/changeUserStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez bloquer cet utilisateur ?');">
-                                            <input type="hidden" name="user_id" value="<?= $user["user_id"] ?>">
+                                        <form method="POST" action="/admin/changecourseStatus" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez bloquer cet utilisateur ?');">
+                                            <input type="hidden" name="course_id" value="<?= $course["course_id"] ?>">
                                             <button class="text-gray-600 hover:text-red-900" name="change_status">
                                                 <i data-lucide="lock" class="w-5 h-5"></i>
                                             </button>
@@ -63,9 +60,7 @@
                                 </td>
                             </tr>
 
-                        <?php
-                        //  endforeach 
-                         ?>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -82,7 +77,7 @@
                 <h3 class="text-gray-700 text-xl font-bold flex-1">Add Course</h3>
             </div>
 
-            <form method="POST" action="/teacher/courses" class="space-y-4 mt-8">
+            <form method="POST" enctype="multipart/form-data" action="/teacher/courses" class="space-y-4 mt-8">
                 <div>
                     <label class="text-gray-700 text-sm mb-1 block">Course title</label>
                     <input type="text" placeholder="Entrez le titre de cours" name="title_cours"
@@ -106,7 +101,7 @@
                 </div>
                 <div>
                     <label class="text-gray-700 text-sm mb-1 block">Link</label>
-                    <input type="text" placeholder="" name="path"
+                    <input type="file" placeholder="" name="file"
                         class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-700 focus:bg-transparent rounded-lg" />
                 </div>
                 <!-- contenu selon  le type de contenu -->

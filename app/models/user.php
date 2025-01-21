@@ -80,6 +80,14 @@ class User  {
             echo "Error in change user Status: " . $e->getMessage();
         }
     }
+
+    public function searchUser($q){
+        $query = $this->conn->prepare("SELECT * FROM users WHERE full_name like ? OR email like ?");
+        $pattern = "%".$q."%";
+        $query->execute([$pattern,$pattern]);
+        $users = $query->fetchAll();
+        return $users;
+    }
 }
 
 

@@ -26,37 +26,44 @@ class EnseignantContoller extends BaseController{
         $this->render('/teacher/courses',["categories"=>$categories,"tags"=>$tags]);
     }
     
-    // public function saveContent(){
-    //     $title = $_POST['title_cours'];
-    //     $description = $_POST['descri_cours'];
-    //     $categorie = $_POST['categorie_cours'];
-    //     $ContentModel = new CourseContentDocument($title);
-    //     $this->conn->ContentModel->
-    // }
     public function AddCourse(){
-       
-        $title = $_POST['title_cours'];
-        $description = $_POST['descri_cours'];
-        $categorie = $_POST['categorie_cours'];
-        // $tags = $_POST['tags_cours'];
-        $type = $_POST['type_cours'];
-        $document_path = $_POST['path'];
-        echo "<pre>";
-        // var_dump($_POST);die();
-        $course = new Course();
-        $teacher_id = $_SESSION['user_loged_in_id'];
-        $course_id = $course->addCourse($title,$description,$categorie,$teacher_id);
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_add_cours'])){
+            $title = $_POST['title_cours'];
+            $description = $_POST['descri_cours'];
+            $categorie = $_POST['categorie_cours'];
+            $tags = $_POST['tags_cours'];
+            $type = $_POST['type_cours'];
+            $file_name = "assets/uploads/".basename($_FILES["file"]["name"]);
+            move_uploaded_file($_FILES["file"]["tmp_name"], $file_name);
+
+            $course = new Course();
+            $teacher_id = $_SESSION['user_loged_in_id'];
+            $course_id = $course->addCourse($title,$description,$categorie,$teacher_id,$tags);
+            
+            if($type === 'document'){
         
-        if($type === 'document'){
-      
-            $ContentModelDoc = new CourseContentDocument($course_id,$document_path);
-            $ContentModelDoc->save();
-        }
-        else{
-            $ContentModelVid = new CourseContentVideo($course_id,$document_path);
-            $ContentModelVid->save();
+                $ContentModelDoc = new CourseContentDocument($course_id,$file_name);
+                $ContentModelDoc->save();
+            }
+            else{
+                $ContentModelVid = new CourseContentVideo($course_id,$file_name);
+                $ContentModelVid->save();
+            }
         }
     }
-    
+
+    public function showCourses(){
+        $user_id = $_SESSION['user_loged_in_id'];
+        $courses = $this->CourseModel->getCourses($user_id);
+        $this->render('/teacher/courses',["courses"=>$courses]);
+    }
+
+    public function deleteCourse(){
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_course'])){
+            $course_id = $_POST['course_id'];
+            $this->CourseModel->deleteCourse($course_id);
+            header('Location:/teacher/courses');
+        }
+    }
 }
 ?>

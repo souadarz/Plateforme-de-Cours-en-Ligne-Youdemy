@@ -133,6 +133,14 @@ class AdminController extends BaseController{
             header('location:/admin/tags');
         }
     }
+
+    public function searchUsers(){
+        $q = $_GET['input_search'];
+        $users =  $this->UserModel->searchUser($q);
+        header('Content-Type:application/json');
+        return json_encode(["label"=>"test"]);
+    }
+
 }
 
 ?>
