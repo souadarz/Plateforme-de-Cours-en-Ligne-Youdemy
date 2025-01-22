@@ -24,10 +24,14 @@
 
     <!-- Dashboard Content avec Responsive -->
     <div class="p-4 sm:p-6 lg:p-8 flex-grow">
-        <!-- Statistiques -->
+    <h3 class="text-3xl font-medium text-gray-700 mb-6">Statistics</h3>
         <div
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <!-- ... Cards statistiques existantes ... -->
+            <div class="bg-white p-6 rounded-lg shadow-md ">
+                <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
+                <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($nbr_courses['total_cours']); ?></p>
+            </div>
         </div>
 
         <!-- Grilles responsive -->

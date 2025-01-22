@@ -15,7 +15,9 @@ class EnseignantContoller extends BaseController{
     }
 
     public function teacherDashboard(){
-        $this->render('/teacher/dashboard');
+        $user_id = $_SESSION['user_loged_in_id'];
+        $nbre_courses = $this->CourseModel->getNbrCourseTeacher($user_id);
+        $this->render('/teacher/dashboard',["nbr_courses"=>$nbre_courses]);
     } 
 
 // la pages des cours de l'enseignant
@@ -55,7 +57,7 @@ class EnseignantContoller extends BaseController{
 
     public function showCourses(){
         $user_id = $_SESSION['user_loged_in_id'];
-        $courses = $this->CourseModel->getCourses($user_id);
+        $courses = $this->CourseModel->getCoursesTeacher($user_id);
         $categories = $this->CategoryModel->getCategories();
         $tags = $this->TagModel->getTags();
         $this->render('/teacher/courses',["courses"=>$courses,"categories"=>$categories,"tags"=>$tags]);
@@ -68,12 +70,16 @@ class EnseignantContoller extends BaseController{
 
     public function updateCourse(){
         if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_course'])){
+            $course_id = $_POST['course_id'];
             $title = $_POST['title_cours'];
             $description = $_POST['descri_cours'];
-            $categorie = $_POST['categorie_cours'];
-            $tags = $_POST['tags_cours'];
-            $type = $_POST['type_cours'];
-            $this->CourseModel->updateCourse($title,$description,$categorie);
+            // $categorie = $_POST['categorie_cours'];
+            // $tags = $_POST['tags_cours'];
+            // $type = $_POST['type_cours'];
+        //      echo "<pre>";
+        // var_dump($_POST);die();
+        // echo "<pre>";
+            $this->CourseModel->updateCourse($title,$description,$course_id);
             header('Location:/teacher/courses');
         }
     }

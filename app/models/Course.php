@@ -38,18 +38,18 @@ class Course {
         }
     }
 
-    public function updateCourse($course_id){
+    // public function update
+
+    public function updateCourse($title,$description,$course_id){
         try{
-            $stmt = $this->conn->prepare("UPDATE course SET title = ?,description = ?,category_id = ? WHERE course_id = ?");
-            $stmt->execute([$course_id]);
+            $stmt = $this->conn->prepare("UPDATE course SET title = ?,description = ? WHERE course_id = ?");
+            $stmt->execute([$title,$description,$course_id]);
         }catch(Exception $e){
             echo "error ". $e->getMessage();
         }
     }
 
-    // public function update
-
-    public function getCourses($user_id){
+    public function getCoursesTeacher($user_id){
         try{
             $stmt = $this->conn->prepare("SELECT * FROM course WHERE user_id = ?");
             $stmt->execute([$user_id]);
@@ -66,8 +66,9 @@ class Course {
             $stmt->execute([$course_id]);
             $course = $stmt->fetch(PDO::FETCH_ASSOC);
             return $course;
+
         }catch(PDOException $e){
-            echo "Error in get courses: " . $e->getMessage();
+            echo "Error in get course by id : " . $e->getMessage();
         }
     }
 
@@ -78,5 +79,37 @@ class Course {
         }catch(PDOException $e){
             echo "Error in get course: " . $e->getMessage();
         }
+    }
+
+    public function getNbreCourse(){
+        $query = $this->conn->prepare("SELECT COUNT(*) AS total_course FROM course");
+        $query->execute();
+        $total_courses = $query->fetch(PDO::FETCH_ASSOC);
+        return $total_courses;
+    }
+
+    public function getCourseByCategry(){
+        $query = $this->conn->prepare("SELECT COUNT(*) AS total_courses, category_name FROM course 
+                                    JOIN categories WHERE course.category_id = categories.category_id
+                                    GROUP BY category_name;");
+        $query->execute();
+        $total_Courses = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $total_Courses;
+    }
+
+    public function getNbrCourseTeacher($user_id){
+        $query = $this->conn->prepare("SELECT COUNT(*) AS total_cours FROM course WHERE user_id = ?");
+        $query->execute([$user_id]);
+        $total_courses = $query->fetch(PDO::FETCH_ASSOC);
+        return $total_courses;
+    }
+
+    public function getCoursesStudent($user_id){
+        $stmt = $this->conn->prepare("SELECT enrollment.* , course.* FROM enrollment  
+                                    LEFT JOIN course ON enrollment.course_id = course.course_id
+                                    WHERE enrollment.user_id = ?");
+        $stmt->execute([$user_id]);
+        $coursesStudent = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $coursesStudent;
     }
 }

@@ -9,9 +9,6 @@ abstract class CourseContent {
     public function __construct($course_id)
     {
         $this->course_id = $course_id;
-        // $this->content_id = $content_id;
-        // $this->course_type = $course_type;
-        // $this->conn = Database::getInstance()->getConnection();
         
     }
 

@@ -25,17 +25,66 @@
     </div>
 
     <!-- Dashboard Content avec Responsive -->
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"> -->
     <div class="p-4 sm:p-6 lg:p-8 flex-grow">
-        <!-- Statistiques -->
-        <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- ... Cards statistiques existantes ... -->
+        <h3 class="text-3xl font-medium text-gray-700 mb-6">Statistics</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md ">
+                <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
+                <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($total_courses['total_course']); ?></p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md ">
+                <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
+                <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($total_courses['total_course']); ?></p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md ">
+                <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
+                <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($total_courses['total_course']); ?></p>
+            </div>
         </div>
 
         <!-- Grilles responsive -->
         <div
             class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
             <!-- ... Rest of your content ... -->
+            <?php
+            //  if (!empty($total_courseCat)) {
+            //         echo "<table border='1'>";
+            //         echo "<tr><th>Nombre de cours</th><th>Catégorie</th></tr>";
+            //         foreach ($total_courseCat as $row) {
+            //             echo "<tr>";
+            //             echo "<td>" . htmlspecialchars($row['total_courses']) . "</td>";
+            //             echo "<td>" . htmlspecialchars($row['category_name']) . "</td>";
+            //             echo "</tr>";
+            //         }
+            //         echo "</table>";
+            //     }
+            ?>
+            <h1>Nombre de cours par catégorie</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Nombre de cours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($total_courseCat)): ?>
+                        <?php foreach ($total_courseCat as $category): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($category['category_name']) ?></td>
+                                <td><?= htmlspecialchars($category['total_courses']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="2">Aucune catégorie trouvée.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>

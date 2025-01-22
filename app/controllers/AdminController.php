@@ -18,9 +18,10 @@ class AdminController extends BaseController{
     }
 
     public function adminDashboard(){
-        $this->render('admin/dashboard');
+        $total_courses = $this->CourseModel->getNbreCourse();
+        $total_courseCat = $this->CourseModel->getCourseByCategry();
+        $this->render('admin/dashboard',["total_courses"=>$total_courses, "total_courseCat"=>$total_courseCat]);
     }
-
     
 //gestion des utilisateurs
     
@@ -96,6 +97,7 @@ class AdminController extends BaseController{
             header('location:/admin/categories');
         }
     }
+
 
 //gestion des tags
 

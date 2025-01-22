@@ -45,7 +45,7 @@
                                             </button>
                                         </form>
                                         <a href="/teacher/course_updated/<?= $course['course_id'] ?>">
-                                            <button data-course-id="<?= $course['course_id'] ?>" class="updateCours text-gray-600 hover:text-blue-900" name="update_course">
+                                            <button class="updateCours text-gray-600 hover:text-blue-900" name="update_course">
                                                 <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
                                         </a>

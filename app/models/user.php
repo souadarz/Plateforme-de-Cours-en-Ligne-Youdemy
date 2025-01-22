@@ -15,7 +15,6 @@ class User  {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $result = $this->conn->query($usersNbrQuery)->fetchColumn();
         $role = ($result == 0) ? "Admin" : $_POST['role'];
-        // var_dump($role); die();
         
         $stmt = $this->conn->prepare("INSERT INTO users (full_name, email, password, role, status) VALUES (?, ?, ?,?,?)");
         $stmt->execute([$full_name, $email,$hashedPassword,$role,$status]);
@@ -89,6 +88,5 @@ class User  {
         return $users;
     }
 }
-
 
 ?>

@@ -44,7 +44,7 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
         </a>
         <a href="/admin/courses"
             class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
-            <i data-lucide="repeat" class="w-5 h-5 mr-3"></i>
+            <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
             <span>Courses</span>
         </a>
         <a href="/admin/categories"
@@ -79,16 +79,16 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
             </a>
             <a href="/teacher/courses"
                 class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
-                <i data-lucide="repeat" class="w-5 h-5 mr-3"></i>
+                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
                 <span>Courses</span>
             </a>
         </nav>
 
     <?php elseif ($_SESSION['user_loged_in_role'] == 'Student') :?>
         <nav class="mt-6 flex-grow">
-            <a href="/student/mesCours"
+            <a href="/student/myCourses"
                 class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
-                <i data-lucide="repeat" class="w-5 h-5 mr-3"></i>
+                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
                 <span>My Courses</span>
             </a>
         </nav>

@@ -14,10 +14,12 @@ require_once '../app/controllers/EtudiantContoller.php';
 $router = new Router();
 Route::setRouter($router);
 $baseController = new BaseController();
-// $baseController->checkRole();
+$baseController->checkRole();
 
 
 // Define routes
+
+Route::get('/', [BaseController::class, 'index']);
 
 // auth routes
 
@@ -48,6 +50,7 @@ Route::post('/admin/deletecourse', [AdminController::class, 'deleteCourse']);
 Route::get('/admin/courses', [AdminController::class, 'showAllCourses']);
 
 
+
 //teacher routes
 Route::get('/admin/categories', [AdminController::class, 'showCategorie']);
 Route::get('/teacher/dashboard', [EnseignantContoller::class, 'teacherDashboard']);
@@ -59,10 +62,10 @@ Route::post('/teacher/updatecourse', [EnseignantContoller::class, 'updateCourse'
 Route::get('/teacher/course_updated/{course_id}', [EnseignantContoller::class, 'getCourseById']);
 
 
-
 //student route 
-Route::get('/student/mycourses', [EtudiantContoller::class, 'studentCoursePage']);
-
+Route::get('/student/myCourses', [EtudiantContoller::class, 'studentCoursePage']);
+Route::get('/student/myCourses', [EtudiantContoller::class, 'studentCoursePage']);
+Route::post('/student/myCourses/{course_id}', [EtudiantContoller::class, 'enroll']);
 
 
 

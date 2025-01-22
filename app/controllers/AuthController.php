@@ -71,7 +71,7 @@ class AuthController extends BaseController
             if ($user['role'] == "Admin") {
                 header('Location:/admin/dashboard');
             } else if ($user['role'] == "Student") {
-                header('Location:/student/mycourses');
+                header('Location:/student/myCourses');
             } else {
                 header('Location:/teacher/dashboard');
             }
