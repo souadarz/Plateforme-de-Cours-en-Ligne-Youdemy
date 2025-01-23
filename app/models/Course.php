@@ -51,7 +51,9 @@ class Course {
 
     public function getCoursesTeacher($user_id){
         try{
-            $stmt = $this->conn->prepare("SELECT * FROM course WHERE user_id = ?");
+            $stmt = $this->conn->prepare("SELECT course.*,categories.category_name FROM course 
+                                        JOIN categories ON course.category_id = categories.category_id
+                                        WHERE course.user_id = ?");
             $stmt->execute([$user_id]);
             $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $courses;
@@ -112,4 +114,22 @@ class Course {
         $coursesStudent = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $coursesStudent;
     }
+    public function getDetailsCourse($course_id){
+        $stmt =$this->conn->prepare("SELECT course.*,categories.category_name,content_document.document_path AS url,users.full_name,content.course_type FROM course
+                                    JOIN categories ON course.category_id = categories.category_id
+                                    JOIN content ON content.course_id = course.course_id
+                                    JOIN content_document ON content_document.content_id = content.content_id
+                                    JOIN users ON course.user_id = users.user_id
+                                    WHERE course.course_id = ?
+                                    UNION
+                                    SELECT course.*,categories.category_name,content_video.video_url AS url,users.full_name,content.course_type FROM course
+                                    JOIN categories ON course.category_id = categories.category_id
+                                    JOIN content ON content.course_id = course.course_id
+                                    JOIN content_video ON content_video.content_id = content.content_id
+                                    JOIN users ON course.user_id = users.user_id
+                                    WHERE course.course_id = ?");
+        $stmt->execute([$course_id,$course_id]);
+        $courseDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $courseDetails;
+}
 }

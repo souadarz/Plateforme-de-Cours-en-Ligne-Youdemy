@@ -151,6 +151,9 @@ class AdminController extends BaseController{
     
     public function showAllCourses(){
         $courses = $this->CourseModel->getAllCourses();
+        echo "<pre>";
+        var_dump($courses);die();
+        echo "<pre>";
         $categories = $this->CategoryModel->getCategories();
         $tags = $this->TagModel->getTags();
         $this->render('/admin/courses',["courses"=>$courses,"categories"=>$categories,"tags"=>$tags]);

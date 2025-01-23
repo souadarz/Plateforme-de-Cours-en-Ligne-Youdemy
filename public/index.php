@@ -66,6 +66,8 @@ Route::get('/teacher/course_updated/{course_id}', [EnseignantContoller::class, '
 Route::get('/student/myCourses', [EtudiantContoller::class, 'studentCoursePage']);
 Route::get('/student/myCourses', [EtudiantContoller::class, 'studentCoursePage']);
 Route::post('/student/myCourses/{course_id}', [EtudiantContoller::class, 'enroll']);
+Route::get('/student/catalogue', [EtudiantContoller::class, 'cataloguePage']);
+Route::get('/student/courseDetails/{course_id}', [EtudiantContoller::class, 'pageCourseDetails']);
 
 
 

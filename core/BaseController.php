@@ -18,35 +18,18 @@ class BaseController
         include __DIR__ . '/../app/views/' . $view . '.php';
     }
 
-    // function checkRole()
-    // {
-    //     $url = $_SERVER['REQUEST_URI'];
-    //     $parts = explode('/', trim($url, '/'));
-    //     $urlRole = $parts[0] ?? '';
-
-    //     if (isset($_SESSION['user_loged_in_role'])) {
-    //         $sessionRole = $_SESSION['user_loged_in_role'];
-    //         if (in_array($urlRole, ['admin', 'teacher', 'student'])) {
-
-    //             if ($sessionRole !== $urlRole) {
-    //                 header("Location:/unauthorized");
-    //                 exit;
-    //             }
-    //         } else if ($urlRole === "login") {
-    //             header("Location:$sessionRole/dashboard");
-    //         }
-    //     }
-    // }
 
     public function checkRole()
     {
-        $url = $_SERVER['REQUEST_URI'];
+        $excludes = ["",'login','register'];
+        $url = strtolower($_SERVER['REQUEST_URI']);
         $parts = explode('/', trim($url, '/'));
         $urlFirstPart = $parts[0] ?? '';
-
+        if(in_array($urlFirstPart,$excludes))
+            return;
         if (isset($_SESSION['user_loged_in_role'])) {
-            $sessionRole = $_SESSION['user_loged_in_role'];
-            if (in_array($urlFirstPart, ['Admin', 'Teacher', 'Student'])) {
+            $sessionRole = strtolower($_SESSION['user_loged_in_role']);
+            if (in_array($urlFirstPart, ['admin', 'teacher', 'student'])) {
 
                 if ($sessionRole !== $urlFirstPart) {
                     header("Location:/unauthorized");
@@ -56,7 +39,7 @@ class BaseController
                 header("Location:".strtolower($sessionRole)."/dashboard");
             }
         } else {
-            if (in_array($urlFirstPart, ['Admin', 'Teacher', 'Student'])) {
+            if (in_array($urlFirstPart, ['admin', 'teacher', 'student'])) {
                 header("Location:/unauthorized");
                 exit;
             }

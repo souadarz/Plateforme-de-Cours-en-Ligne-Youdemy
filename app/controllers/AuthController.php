@@ -71,7 +71,7 @@ class AuthController extends BaseController
             if ($user['role'] == "Admin") {
                 header('Location:/admin/dashboard');
             } else if ($user['role'] == "Student") {
-                header('Location:/student/myCourses');
+                header('Location:/student/catalogue');
             } else {
                 header('Location:/teacher/dashboard');
             }
@@ -86,7 +86,7 @@ class AuthController extends BaseController
             unset($_SESSION['user_loged_in_role']);
             session_destroy();
         }
-        header("Location:/login");
+        header("Location:/");
         exit;
     }
 }

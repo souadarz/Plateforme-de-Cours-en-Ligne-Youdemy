@@ -12,12 +12,12 @@
 
     <header class="bg-gray-900 text-white py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Course Catalog</h1>
+            <!-- <h1 class="text-2xl font-bold">Course Catalog</h1> -->
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="#" class="hover:text-gray-300">Home</a></li>
-                    <li><a href="/register" class="hover:text-gray-300">Sign Up</a></li>
-                    <li><a href="/login" class="hover:text-gray-300">Login</a></li>
+                    <!-- <li><a href="/register" class="hover:text-gray-300">Sign Up</a></li> -->
+                    <li><a href="/myCourses" class="hover:text-gray-300">Mycourses</a></li>
                 </ul>
             </nav>
         </div>
@@ -36,16 +36,14 @@
                     </p>
 
                     <div class="mt-4 flex justify-between gap-2">
-                        <a href="course.php?id=<?= $course['course_id'] ?>"
+                        <a href="/student/courseDetails/<?= $course['course_id'] ?>"
                             class="flex-1 text-center bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
                             view course details
                         </a>
     
-                        <!-- "/student/myCourses/<?= $course['course_id'] ?>" -->
-                        <a href=/login
-                            class="flex-1 text-center bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
-                            Enroll
-                        </a>
+                         <form method="POST" action="/student/myCourses/<?= $course['course_id'] ?>">
+                            <button type="submit" name="onrollement" class="flex-1 text-center bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">Enroll</button>
+                        </form>
                     </div>
                 </div>
             </div>

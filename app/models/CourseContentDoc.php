@@ -32,14 +32,13 @@ class CourseContentDocument extends CourseContent{
     }
 
     public function display($course_id){
-        $stmt =$this->conn->prepare("SELECT title ,description, type FROM course 
+        $stmt =$this->conn->prepare("SELECT title ,description, content.course_type FROM course 
         JOIN content ON course.course_id = content.course_id 
-        JOIN content_document ON content.content_id = content_document.content_id;
-        WHERE course_id = ?");
-        // $result = $this->conn->fetch($stmt,);
-        // return $result;
+        JOIN content_document ON content.content_id = content_document.content_id
+        WHERE course.course_id = ?");
+        $result = $this->conn->fetch($stmt,[$course_id]);
+        return $result;
     }
-    
 }
 
 ?>

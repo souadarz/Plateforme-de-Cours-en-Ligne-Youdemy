@@ -111,6 +111,7 @@
         </div>
       </form>
       <div class="mt-4 text-sm text-gray-600 text-center">
+      <p>You don't have an account? <a href="/register" class="text-black hover:underline">sign Up here</a>
       </div>
     </div>
   </div>

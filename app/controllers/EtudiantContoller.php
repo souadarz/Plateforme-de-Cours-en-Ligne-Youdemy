@@ -29,6 +29,15 @@ class EtudiantContoller extends BaseController{
         }
     }
 
+    public function cataloguePage(){
+        $courses = $this->CourseModel->getAllCourses();
+        $this->render('/student/catalogue',["courses"=>$courses]);
+    }
+    
+    public function pageCourseDetails($course_id){
+        $coursedetails = $this->CourseModel->getDetailsCourse($course_id);
+        $this->render('/student/courseDetailsPage',["courseDetails"=>$coursedetails]);
+    }
 
 }
 ?>

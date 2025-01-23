@@ -14,7 +14,7 @@
                     </p>
 
                     <div class="mt-4 flex justify-between gap-2">
-                        <a href="course.php?id=<?= $course['course_id'] ?>"
+                        <a href="courseDetails/<?= $course['course_id'] ?>"
                             class="flex-1 text-center bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
                             view course details
                         </a>
