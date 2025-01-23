@@ -35,13 +35,13 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
         <a href="/admin/enseignants"
             class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
             <i data-lucide="users" class="w-5 h-5 mr-3"></i>
-            <span>Teachers</span>
+            <span>Users</span>
         </a>
-        <a href="/admin/etudiants"
+        <!-- <a href="/admin/etudiants"
             class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
             <i data-lucide="users" class="w-5 h-5 mr-3"></i>
             <span>Students</span>
-        </a>
+        </a> -->
         <a href="/admin/courses"
             class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
             <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
@@ -90,6 +90,11 @@ class="fixed h-screen inset-y-0 left-0 transform -translate-x-full lg:translate-
                 class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
                 <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
                 <span>My Courses</span>
+            </a>
+            <a href="/student/catalogue"
+                class="flex items-center w-full px-6 py-3 text-gray-400 hover:text-white hover:bg-gray-800">
+                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
+                <span>Catalogue</span>
             </a>
         </nav>
     <?php endif;?>

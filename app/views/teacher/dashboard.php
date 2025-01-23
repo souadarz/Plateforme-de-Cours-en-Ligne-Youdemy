@@ -34,10 +34,36 @@
             </div>
         </div>
 
-        <!-- Grilles responsive -->
-        <div
-            class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
-            <!-- ... Rest of your content ... -->
+        <div class="flex flex-col mt-6">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-4">Nunmber d'enrollement of course</h1>
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                                course title
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                                Nombre d'enrollement
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <?php if (!empty($courseEnrollmentsByTeacher)): ?>
+                            <?php foreach ($courseEnrollmentsByTeacher as $category): ?>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?= htmlspecialchars($category['title']) ?></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600 font-semibold"><?= htmlspecialchars($category['nbr_enroll']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2" class="px-6 py-4 text-center text-gray-500">Aucune catégorie trouvée.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -12,12 +12,12 @@
 
     <header class="bg-gray-900 text-white py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <!-- <h1 class="text-2xl font-bold">Course Catalog</h1> -->
+            <h1 class="text-2xl font-bold">Course Catalog</h1>
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="#" class="hover:text-gray-300">Home</a></li>
                     <!-- <li><a href="/register" class="hover:text-gray-300">Sign Up</a></li> -->
-                    <li><a href="/myCourses" class="hover:text-gray-300">Mycourses</a></li>
+                    <li><a href="/student/myCourses" class="hover:text-gray-300">Mycourses</a></li>
                 </ul>
             </nav>
         </div>

@@ -17,7 +17,8 @@ class EnseignantContoller extends BaseController{
     public function teacherDashboard(){
         $user_id = $_SESSION['user_loged_in_id'];
         $nbre_courses = $this->CourseModel->getNbrCourseTeacher($user_id);
-        $this->render('/teacher/dashboard',["nbr_courses"=>$nbre_courses]);
+        $courseEnrollmentsByTeacher = $this->CourseModel->getNbrEnrollment($user_id);
+        $this->render('/teacher/dashboard',["nbr_courses"=>$nbre_courses,"courseEnrollmentsByTeacher"=>$courseEnrollmentsByTeacher]);
     } 
 
 // la pages des cours de l'enseignant

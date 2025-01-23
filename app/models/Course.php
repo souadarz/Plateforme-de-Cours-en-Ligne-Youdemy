@@ -19,7 +19,7 @@ class Course {
                 $stmt->execute([$course_id,$tag]);
             }
                 $this->conn->commit();
-            
+                
             return $course_id;
         }catch(Exception $e){
             $this->conn->rollBack();
@@ -29,7 +29,8 @@ class Course {
 
     public function getAllCourses(){
         try{
-            $stmt = $this->conn->prepare("SELECT * FROM course ");
+            $stmt = $this->conn->prepare("SELECT course.*,categories.category_name FROM course 
+                                        JOIN categories ON course.category_id = categories.category_id");
             $stmt->execute();
             $AllCourses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $AllCourses;
@@ -132,4 +133,37 @@ class Course {
         $courseDetails = $stmt->fetch(PDO::FETCH_ASSOC);
         return $courseDetails;
 }
+
+    public function getCourseMaxStudent(){
+        $stmt = $this->conn->prepare("SELECT COUNT(enrollment.course_id) AS nbr_enroll, course.title FROM enrollment 
+                                    JOIN course ON enrollment.course_id = course.course_id
+                                    GROUP BY course.course_id, course.title
+                                    ORDER BY nbr_enroll DESC
+                                    LIMIT 1");
+        $stmt->execute();
+        $CourseMaxStudent = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $CourseMaxStudent;
+    }
+
+    public function getNbrEnrollCourse($user_id){
+        $stmt = $this->conn->prepare("SELECT COUNT(enrollment.course_id) AS nbr_enroll, course.title FROM enrollment 
+                                    JOIN course ON enrollment.course_id = course.course_id
+                                    GROUP BY course.course_id, course.title
+                                    ORDER BY nbr_enroll DESC 
+                                    WHERE course.user_id = ?");
+        $stmt->execute([$user_id]);
+        $CourseMaxStudent = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $CourseMaxStudent;
+    }
+    public function getNbrEnrollment($user_id){
+        $stmt = $this->conn->prepare("SELECT COUNT(enrollment.course_id) AS nbr_enroll, course.title,u.full_name FROM enrollment 
+                                    JOIN course ON enrollment.course_id = course.course_id
+                                    JOIN users u ON u.user_id=course.user_id
+                                    WHERE course.user_id = ?
+                                    GROUP BY course.course_id, course.title
+                                    ORDER BY nbr_enroll DESC");
+        $stmt->execute([$user_id]);
+        $CourseMaxStudent = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $CourseMaxStudent;
+    }
 }

@@ -34,57 +34,46 @@
                 <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
                 <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($total_courses['total_course']); ?></p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md ">
+            <!-- <div class="bg-white p-6 rounded-lg shadow-md ">
                 <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
                 <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($total_courses['total_course']); ?></p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md ">
                 <h4 class="text-lg font-semibold text-gray-600">Total Courses</h4>
                 <p class="mt-4 text-3xl font-bold text-indigo-600"><?= htmlspecialchars($total_courses['total_course']); ?></p>
-            </div>
+            </div> -->
         </div>
 
-        <!-- Grilles responsive -->
-        <div
-            class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
-            <!-- ... Rest of your content ... -->
-            <?php
-            //  if (!empty($total_courseCat)) {
-            //         echo "<table border='1'>";
-            //         echo "<tr><th>Nombre de cours</th><th>Catégorie</th></tr>";
-            //         foreach ($total_courseCat as $row) {
-            //             echo "<tr>";
-            //             echo "<td>" . htmlspecialchars($row['total_courses']) . "</td>";
-            //             echo "<td>" . htmlspecialchars($row['category_name']) . "</td>";
-            //             echo "</tr>";
-            //         }
-            //         echo "</table>";
-            //     }
-            ?>
-            <h1>Nombre de cours par catégorie</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Catégorie</th>
-                        <th>Nombre de cours</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($total_courseCat)): ?>
-                        <?php foreach ($total_courseCat as $category): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($category['category_name']) ?></td>
-                                <td><?= htmlspecialchars($category['total_courses']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+        <div class="flex flex-col mt-6">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-4">Nombre de cours par catégorie</h1>
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
                         <tr>
-                            <td colspan="2">Aucune catégorie trouvée.</td>
+                            <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                                Catégorie
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                                Nombre de cours
+                            </th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <?php if (!empty($total_courseCat)): ?>
+                            <?php foreach ($total_courseCat as $category): ?>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?= htmlspecialchars($category['category_name']) ?></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600 font-semibold"><?= htmlspecialchars($category['total_courses']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2" class="px-6 py-4 text-center text-gray-500">Aucune catégorie trouvée.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

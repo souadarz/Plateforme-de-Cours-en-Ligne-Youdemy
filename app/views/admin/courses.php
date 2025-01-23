@@ -5,7 +5,7 @@
     <header class="mb-6">
         <div class=" mb-4 flex items-center justify-between gap-4 md:mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Courses</h1>
-            <button id="add_course_button" class="addCours text-gray-100 bg-gray-900 hover:bg-gray-700 py-3 px-6 mb-5 mr-5 mt-4 rounded-sm">Add Course</button>
+            <!-- <button id="add_course_button" class="addCours text-gray-100 bg-gray-900 hover:bg-gray-700 py-3 px-6 mb-5 mr-5 mt-4 rounded-sm">Add Course</button> -->
         </div>
     </header>
     <div class="bg-white rounded-lg shadow">
@@ -33,11 +33,11 @@
                                     <div class="email text-sm text-gray-900"><?= htmlspecialchars($course['description']) ?></div>
                                 </td>
                                 <td class="p-3">
-                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($course['category_id']) ?></div>
+                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($course['category_name']) ?></div>
                                 </td>
                                 <td class="p-3">
                                     <div class="flex space-x-2 items-center">
-                                        <form method="POST" action="/admin/deletecourse" style="display:inline;" onsubmit="return confirm('Vous êtes sûr, vous voulez supprimer cet utilisateur ?');">
+                                        <form method="POST" action="/admin/deletecourse" style="display:inline;" onsubmit="return confirm('are You sure, you want to delete this course ?');">
                                             <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
                                             <button class="text-gray-600 hover:text-blue-900" name="delete_course">
                                                 <i data-lucide="trash-2" class="w-5 h-5"></i>

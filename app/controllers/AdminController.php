@@ -20,7 +20,8 @@ class AdminController extends BaseController{
     public function adminDashboard(){
         $total_courses = $this->CourseModel->getNbreCourse();
         $total_courseCat = $this->CourseModel->getCourseByCategry();
-        $this->render('admin/dashboard',["total_courses"=>$total_courses, "total_courseCat"=>$total_courseCat]);
+        $CourseMaxStudent =$this->CourseModel->getCourseMaxStudent();
+        $this->render('admin/dashboard',["total_courses"=>$total_courses, "total_courseCat"=>$total_courseCat,"CourseMaxStudent"=>$CourseMaxStudent]);
     }
     
 //gestion des utilisateurs
@@ -151,9 +152,6 @@ class AdminController extends BaseController{
     
     public function showAllCourses(){
         $courses = $this->CourseModel->getAllCourses();
-        echo "<pre>";
-        var_dump($courses);die();
-        echo "<pre>";
         $categories = $this->CategoryModel->getCategories();
         $tags = $this->TagModel->getTags();
         $this->render('/admin/courses',["courses"=>$courses,"categories"=>$categories,"tags"=>$tags]);
