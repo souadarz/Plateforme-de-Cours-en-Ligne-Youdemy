@@ -7,7 +7,6 @@ class Router
     private $routes = [
         'GET' => [],
         'POST' => [],
- 
     ];
 
     // Add a route

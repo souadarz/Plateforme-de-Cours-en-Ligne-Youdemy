@@ -9,7 +9,6 @@ abstract class CourseContent {
     public function __construct($course_id)
     {
         $this->course_id = $course_id;
-        
     }
 
     abstract public function save();
